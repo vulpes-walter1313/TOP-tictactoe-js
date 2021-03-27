@@ -1,0 +1,42 @@
+*, body, html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, body, p {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+.all-wrapper {
+  background: beige;
+  padding: 1em;
+  height: 100vh;
+}
+
+.board {
+  background-color: brown;
+  width: min(100%, 600px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 100px);
+  gap: 1em;
+  justify-items: center;
+  align-items: center;
+}
+.board .board-slot {
+  background-color: pink;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*# sourceMappingURL=styles.css.map */
