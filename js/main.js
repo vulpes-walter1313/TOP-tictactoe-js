@@ -70,6 +70,7 @@ const gameBoard = (function (doc) {
        });
        displayBoard();
     }
+
     return { displayBoard, playTurn, resetBoard, winCheck };
 })(document);
 
@@ -79,9 +80,27 @@ function playerFactory(name, token) {
     };
     return {name, token, getInfo};
 }
+function handlePlayersEnter() {
+
+}
 
 // buttons
 const resetBtn = document.querySelector('#reset-board-btn');
 resetBtn.addEventListener('click', () => {
     gameBoard.resetBoard();
+});
+
+const enterPlayersForm = document.querySelector('.player-init-inputs');
+let enterPlayersBtn = document.querySelector('#enter-players');
+const playerOneName = document.querySelector('#name-player1');
+const playerOneToken = document.querySelector('#token-player1');
+const playerTwoName = document.querySelector('#name-player2');
+const playerTwoToken = document.querySelector('#token-player2');
+let player1;
+let player2;
+
+enterPlayersBtn.addEventListener('click', () => {
+    player1 = playerFactory(playerOneName.value, playerOneToken.value);
+    player2 = playerFactory(playerTwoName.value, playerTwoToken.value);
+    enterPlayersForm.classList.add('hide');
 });
