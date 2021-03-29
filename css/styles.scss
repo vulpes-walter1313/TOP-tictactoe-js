@@ -27,6 +27,20 @@ h1 {
         margin: 0 0 1.2rem;
     }
 }
+.control-btns {
+    display: flex;
+    justify-content: space-around;
+    .control-btn {
+        appearance: none;
+        border-style: none;
+        padding: 1rem;
+        background-color: c.$secondary;
+        color: c.$white;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 1em;
+    }
+}
 
 .board {
     background-color: c.$primary;
@@ -51,5 +65,37 @@ h1 {
     }
     .board-slot.winner {
         background-color: c.$secondary;
+    }
+}
+.player-init-inputs {
+    background: c.$third;
+    color: c.$background;
+    width: min(90%, 400px);
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    label {
+        font-weight: 600;
+        margin: 1em 0 .3em;
+    }
+    input[type="text"] {
+        font-size: 1rem;
+        padding: .5rem;
+        font-family: f.$font-stack-one;
+    }
+    button {
+        appearance: none;
+        border-style: none;
+        margin: 1em 0;
+        font-size: 1rem;
+        padding: 1em 0;
+        background-color: c.$primary;
+        color: c.$white;
+        font-weight: 600;
     }
 }

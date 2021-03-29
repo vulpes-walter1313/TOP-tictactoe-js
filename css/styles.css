@@ -33,6 +33,21 @@ h1 {
   margin: 0 0 1.2rem;
 }
 
+.control-btns {
+  display: flex;
+  justify-content: space-around;
+}
+.control-btns .control-btn {
+  appearance: none;
+  border-style: none;
+  padding: 1rem;
+  background-color: #4ecdc4;
+  color: #f7fff7;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1em;
+}
+
 .board {
   background-color: #ff6b6b;
   width: min(100%, 600px);
@@ -56,6 +71,39 @@ h1 {
 }
 .board .board-slot.winner {
   background-color: #4ecdc4;
+}
+
+.player-init-inputs {
+  background: #ffe66d;
+  color: #1a535c;
+  width: min(90%, 400px);
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.player-init-inputs label {
+  font-weight: 600;
+  margin: 1em 0 0.3em;
+}
+.player-init-inputs input[type=text] {
+  font-size: 1rem;
+  padding: 0.5rem;
+  font-family: Arial, sans-serif;
+}
+.player-init-inputs button {
+  appearance: none;
+  border-style: none;
+  margin: 1em 0;
+  font-size: 1rem;
+  padding: 1em 0;
+  background-color: #ff6b6b;
+  color: #f7fff7;
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=styles.css.map */
