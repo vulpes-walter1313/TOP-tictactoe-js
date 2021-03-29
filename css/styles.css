@@ -106,4 +106,8 @@ h1 {
   font-weight: 600;
 }
 
+.player-init-inputs.hide {
+  display: none;
+}
+
 /*# sourceMappingURL=styles.css.map */
