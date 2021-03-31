@@ -1,4 +1,5 @@
 const gameBoard = (function (doc) {
+    let playersTurnNotice = doc.querySelector(".whos-turn");
     let board = { topl: "",
                   topm: "",
                   topr: "",
@@ -9,6 +10,9 @@ const gameBoard = (function (doc) {
                   botm: "",
                   botr: ""};
     let slots = doc.querySelectorAll('[data-key]');
+    let roundNumber = 0;
+    
+    // Functions
     function displayBoard () {
         console.log(board);
         // const slots = doc.querySelectorAll('[data-key]');
@@ -26,9 +30,10 @@ const gameBoard = (function (doc) {
         displayBoard();
         if (winCheck(player.token)) {
             console.log(`You won ${player.name}!!`);
+            playersTurnNotice.textContent = `${player.name} Won The Game!!`;
         }
     }
-
+    
     function winCheck(token) {
         let wonFlag = false;
         const wonTest = (str) => board[str] === token ? true : false;
@@ -44,7 +49,7 @@ const gameBoard = (function (doc) {
             // diagnol
             ["topl", "midm", "botr"],
             ["botl", "midm", "topr"]
-            ];
+        ];
         winningCombos.forEach( combo => {
             if(combo.every(wonTest)) {
                 wonFlag = true;
@@ -58,20 +63,47 @@ const gameBoard = (function (doc) {
         });
         return wonFlag;
     }
-
+    
     function resetBoard() {
-       for(key in board) {
-           board[key] = "";
-       }
-       slots.forEach(slot => {
-        if (slot.classList.contains("winner")) {
-            slot.classList.remove("winner");
+        for(key in board) {
+            board[key] = "";
         }
-       });
-       displayBoard();
+        slots.forEach(slot => {
+            if (slot.classList.contains("winner")) {
+                slot.classList.remove("winner");
+            }
+        });
+        displayBoard();
+    }
+    function isBoardFull() {
+        if (Array.from(slots).every(slot => board[slot.dataset.key] != "")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    return { displayBoard, playTurn, resetBoard, winCheck };
+    function changePlayersTurnNotice(player) {
+        playersTurnNotice.textContent = `It's ${player.name}'s turn`;
+        
+    }
+    
+    function gameRound(player1, player2, slotChoice) {
+        if (isBoardFull() == false) {
+            if (roundNumber % 2 == 0) {
+                changePlayersTurnNotice(player2);
+                playTurn(player1, slotChoice);
+            } else {
+                changePlayersTurnNotice(player1);
+                playTurn(player2, slotChoice);
+            }
+            roundNumber++;
+        } else {
+            console.log("Reset it my guy");
+        }
+    }
+    
+    return { displayBoard, playTurn, resetBoard, gameRound };
 })(document);
 
 function playerFactory(name, token) {
@@ -81,7 +113,7 @@ function playerFactory(name, token) {
     return {name, token, getInfo};
 }
 function handlePlayersEnter() {
-
+    
 }
 
 // buttons
@@ -104,3 +136,9 @@ enterPlayersBtn.addEventListener('click', () => {
     player2 = playerFactory(playerTwoName.value, playerTwoToken.value);
     enterPlayersForm.classList.add('hide');
 });
+// Set trigger points for clicks
+let slots = document.querySelectorAll('[data-key]');
+slots.forEach( slot => slot.addEventListener('click', function() {
+    console.log(this);
+    gameBoard.gameRound(player1, player2, this.dataset.key)
+}));
