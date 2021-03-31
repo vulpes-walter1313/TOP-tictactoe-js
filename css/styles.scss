@@ -11,7 +11,7 @@ h1 {
 .all-wrapper {
     background: c.$background;
     padding: 1em;
-    height: 100vh;
+    min-height: 100vh;
 }
 .info-wrapper {
     width: min(100%, 800px);
@@ -25,6 +25,10 @@ h1 {
         text-align: center;
         color: c.$white;
         margin: 0 0 1.2rem;
+    }
+    .whos-turn {
+        color: c.$primary;
+        font-size: 2rem;
     }
 }
 .control-btns {
