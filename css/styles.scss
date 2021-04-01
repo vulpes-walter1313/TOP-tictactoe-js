@@ -28,7 +28,7 @@ h1 {
     }
     .whos-turn {
         color: c.$primary;
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     .record-keeping-info {
         color: c.$primary;
@@ -53,7 +53,7 @@ h1 {
 .board {
     background-color: c.$primary;
     width: min(100%, 600px);
-    margin: 0 auto;
+    margin: 0 auto 6em;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 100px);
