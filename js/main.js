@@ -11,6 +11,8 @@ const gameBoard = (function (doc) {
                   botr: ""};
     let slots = doc.querySelectorAll('[data-key]');
     let roundNumber = 0;
+    let winnerName;
+
     
     // Functions
     function displayBoard () {
@@ -31,6 +33,7 @@ const gameBoard = (function (doc) {
         if (winCheck(player.token)) {
             console.log(`You won ${player.name}!!`);
             playersTurnNotice.textContent = `${player.name} Won The Game!!`;
+            player.addWin();
         }
     }
     
@@ -99,7 +102,7 @@ const gameBoard = (function (doc) {
             }
             roundNumber++;
         } else {
-            console.log("Reset it my guy");
+            playersTurnNotice.textContent = "⬆Reset it my guy⬆";
         }
     }
     
@@ -107,10 +110,16 @@ const gameBoard = (function (doc) {
 })(document);
 
 function playerFactory(name, token) {
+    let wins = 0;
     const getInfo = () => {
         console.log(`My name is ${name} and i use the token ${token}`);
     };
-    return {name, token, getInfo};
+    const addWin = () => {
+        wins++;
+    };
+    const getWins = () => wins;
+
+    return {name, token, getInfo, addWin, getWins};
 }
 function handlePlayersEnter() {
     
@@ -131,6 +140,8 @@ const playerTwoToken = document.querySelector('#token-player2');
 let player1;
 let player2;
 
+let scoreBoard = document.querySelector('.record-keeping-info');
+
 enterPlayersBtn.addEventListener('click', () => {
     player1 = playerFactory(playerOneName.value, playerOneToken.value);
     player2 = playerFactory(playerTwoName.value, playerTwoToken.value);
@@ -140,5 +151,6 @@ enterPlayersBtn.addEventListener('click', () => {
 let slots = document.querySelectorAll('[data-key]');
 slots.forEach( slot => slot.addEventListener('click', function() {
     console.log(this);
-    gameBoard.gameRound(player1, player2, this.dataset.key)
+    gameBoard.gameRound(player1, player2, this.dataset.key);
+    scoreBoard.textContent = `${player1.name}: ${player1.getWins()} | ${player2.name}: ${player2.getWins()}`;
 }));
