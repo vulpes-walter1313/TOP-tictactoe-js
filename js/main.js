@@ -11,9 +11,8 @@ const gameBoard = (function (doc) {
                   botr: ""};
     let slots = doc.querySelectorAll('[data-key]');
     let roundNumber = 0;
-    let winnerName;
+    let hasBeenWon = false;
 
-    
     // Functions
     function displayBoard () {
         console.log(board);
@@ -56,6 +55,7 @@ const gameBoard = (function (doc) {
         winningCombos.forEach( combo => {
             if(combo.every(wonTest)) {
                 wonFlag = true;
+                hasBeenWon = true;
                 // const slots = document.querySelectorAll("[data-key]");
                 slots.forEach( slot => {
                     if (combo.includes(slot.dataset.key)) {
@@ -76,6 +76,9 @@ const gameBoard = (function (doc) {
                 slot.classList.remove("winner");
             }
         });
+        hasBeenWon = false;
+        roundNumber = 0;
+        playersTurnNotice.textContent = "Player 1 goes first";
         displayBoard();
     }
     function isBoardFull() {
@@ -92,7 +95,7 @@ const gameBoard = (function (doc) {
     }
     
     function gameRound(player1, player2, slotChoice) {
-        if (isBoardFull() == false) {
+        if (isBoardFull() == false && !hasBeenWon) {
             if (roundNumber % 2 == 0) {
                 changePlayersTurnNotice(player2);
                 playTurn(player1, slotChoice);
